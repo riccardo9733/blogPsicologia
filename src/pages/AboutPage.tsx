@@ -1,55 +1,72 @@
 import React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper'; // Optional for section grouping
+import Divider from '@mui/material/Divider'; // For separating items
+
+const experienceItems = [
+  { term: "Licensed Psychologist", definition: "State Board of Psychology" },
+  { term: "Neuropsychology Specialist", definition: "Certified by the National Institute of Neuropsychology" },
+  { term: "Caregiver Support Expert", definition: "Certified by the Caregiver Support Network" },
+];
+
+const educationItems = [
+  { term: "Ph.D. in Clinical Psychology", definition: "University of Serenity, 2013" },
+  { term: "M.A. in Psychology", definition: "University of Serenity, 2010" },
+  { term: "B.A. in Psychology", definition: "University of Serenity, 2008" },
+];
 
 const AboutPage: React.FC = () => {
   return (
-    <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-      {/* Page-specific content from about.html goes here */}
-      <div className="flex flex-wrap justify-between gap-3 p-4">
-        <div className="flex min-w-72 flex-col gap-3">
-          <p className="text-[#0d0f1c] tracking-light text-[32px] font-bold leading-tight">About Me</p>
-          <p className="text-[#47569e] text-sm font-normal leading-normal">
-            I am a licensed psychologist with over 10 years of experience in neuropsychology, psychological support, and caregiver support. My approach is rooted in empathy
-            and evidence-based practices, tailored to meet the unique needs of each individual and family I work with.
-          </p>
-        </div>
-      </div>
-      <h2 className="text-[#0d0f1c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Experience</h2>
-      <div className="p-4 grid grid-cols-[20%_1fr] gap-x-6">
-        <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#ced2e9] py-5">
-          <p className="text-[#47569e] text-sm font-normal leading-normal">Licensed Psychologist</p>
-          <p className="text-[#0d0f1c] text-sm font-normal leading-normal">State Board of Psychology</p>
-        </div>
-        <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#ced2e9] py-5">
-          <p className="text-[#47569e] text-sm font-normal leading-normal">Neuropsychology Specialist</p>
-          <p className="text-[#0d0f1c] text-sm font-normal leading-normal">Certified by the National Institute of Neuropsychology</p>
-        </div>
-        <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#ced2e9] py-5">
-          <p className="text-[#47569e] text-sm font-normal leading-normal">Caregiver Support Expert</p>
-          <p className="text-[#0d0f1c] text-sm font-normal leading-normal">Certified by the Caregiver Support Network</p>
-        </div>
-      </div>
-      <h2 className="text-[#0d0f1c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Education</h2>
-      <div className="p-4 grid grid-cols-[20%_1fr] gap-x-6">
-        <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#ced2e9] py-5">
-          <p className="text-[#47569e] text-sm font-normal leading-normal">Ph.D. in Clinical Psychology</p>
-          <p className="text-[#0d0f1c] text-sm font-normal leading-normal">University of Serenity, 2013</p>
-        </div>
-        <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#ced2e9] py-5">
-          <p className="text-[#47569e] text-sm font-normal leading-normal">M.A. in Psychology</p>
-          <p className="text-[#0d0f1c] text-sm font-normal leading-normal">University of Serenity, 2010</p>
-        </div>
-        <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#ced2e9] py-5">
-          <p className="text-[#47569e] text-sm font-normal leading-normal">B.A. in Psychology</p>
-          <p className="text-[#0d0f1c] text-sm font-normal leading-normal">University of Serenity, 2008</p>
-        </div>
-      </div>
-      <h2 className="text-[#0d0f1c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Approach</h2>
-      <p className="text-[#0d0f1c] text-base font-normal leading-normal pb-3 pt-1 px-4">
-        My therapeutic approach is integrative, drawing from cognitive-behavioral, humanistic, and mindfulness-based techniques. I believe in fostering a collaborative and
-        supportive environment where clients feel empowered to explore their challenges and achieve their goals. I am committed to providing compassionate care that promotes
-        healing and personal growth.
-      </p>
-    </div>
+    <Box sx={{ py: 2 }}> {/* Overall page padding */}
+      <Paper elevation={0} sx={{ p: { xs: 2, sm: 3 }, mb: 4, backgroundColor: 'transparent' }}> {/* Transparent paper, or remove Paper for no bg */}
+        <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 'bold', textAlign: 'center', mb:3 }}>
+          About Me
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ fontSize: {xs: '1rem', md: '1.125rem'}, lineHeight: 1.7, textAlign: 'center', maxWidth: 'md', mx: 'auto' }}>
+          I am a licensed psychologist with over 10 years of experience in neuropsychology, psychological support, and caregiver support. My approach is rooted in empathy and evidence-based practices, tailored to meet the unique needs of each individual and family I work with.
+        </Typography>
+      </Paper>
+
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'medium', mb: 2, textAlign:'center' }}>
+          Experience
+        </Typography>
+        {experienceItems.map((item, index) => (
+          <React.Fragment key={index}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5, px: {xs: 0, sm: 2} }}>
+              <Typography variant="subtitle1" component="span" sx={{fontWeight: 'medium' }}>{item.term}</Typography>
+              <Typography variant="body1" component="span" color="text.secondary" sx={{textAlign: 'right'}}>{item.definition}</Typography>
+            </Box>
+            {index < experienceItems.length - 1 && <Divider />}
+          </React.Fragment>
+        ))}
+      </Box>
+
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'medium', mb: 2, textAlign:'center' }}>
+          Education
+        </Typography>
+        {educationItems.map((item, index) => (
+          <React.Fragment key={index}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5, px: {xs: 0, sm: 2} }}>
+              <Typography variant="subtitle1" component="span" sx={{fontWeight: 'medium'}}>{item.term}</Typography>
+              <Typography variant="body1" component="span" color="text.secondary" sx={{textAlign: 'right'}}>{item.definition}</Typography>
+            </Box>
+            {index < educationItems.length - 1 && <Divider />}
+          </React.Fragment>
+        ))}
+      </Box>
+
+      <Box>
+        <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'medium', mb: 2, textAlign:'center' }}>
+          My Approach
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ fontSize: {xs: '1rem', md: '1.125rem'}, lineHeight: 1.7, textAlign: 'justify', maxWidth: 'md', mx: 'auto' }}>
+          My therapeutic approach is integrative, drawing from cognitive-behavioral, humanistic, and mindfulness-based techniques. I believe in fostering a collaborative and supportive environment where clients feel empowered to explore their challenges and achieve their goals. I am committed to providing compassionate care that promotes healing and personal growth.
+        </Typography>
+      </Box>
+    </Box>
   );
 };
 

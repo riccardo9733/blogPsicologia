@@ -1,93 +1,121 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link
+import { Link as RouterLink } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import PsychologyIcon from '@mui/icons-material/Psychology'; // Example Icon for Neuropsychology
+import FavoriteIcon from '@mui/icons-material/Favorite';   // Example Icon for Psychological Support
+import GroupIcon from '@mui/icons-material/Group';        // Example Icon for Caregiver Support
+
+// Hero Image URL (same as before)
+const heroImageUrl = "https://lh3.googleusercontent.com/aida-public/AB6AXuClsp8pb_FA2vtwGnbiA23IFnS5lovTj0NSaJ0hx6Eh2bkN_GrtTYvEoearZXsDj3G2B4Ul-U9XrxZlY9mVC9XEZ7NVOQVvitHBwZPtwb1gcoJwnMCWgY2ZAVFK8-tTTZMemsZx5wzdRWSnFyfDoNEHSaBIB_VDqlembZMgSO_t7V0mPQp2EXibGzYTAhDSAjEQvCTqU3dvSvC0xdAwE4gI76Xhcnnb3OJuuUY6g_QAnrNx3u9PTbeflyg2tJHBDyfh0rzH9v0QeHBp";
+
+const services = [
+  {
+    title: "Neuropsychology",
+    description: "Assessments and rehabilitation for cognitive functions.",
+    icon: <PsychologyIcon fontSize="large" color="primary" />
+  },
+  {
+    title: "Psychological Support",
+    description: "Therapy for emotional and mental health challenges.",
+    icon: <FavoriteIcon fontSize="large" color="primary" />
+  },
+  {
+    title: "Caregiver Support",
+    description: "Guidance and resources for those caring for loved ones.",
+    icon: <GroupIcon fontSize="large" color="primary" />
+  }
+];
 
 const HomePage: React.FC = () => {
   return (
-    <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-      <div className="@container">
-        <div className="@[480px]:p-4">
-          <div
-            className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4"
-            style={{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuClsp8pb_FA2vtwGnbiA23IFnS5lovTj0NSaJ0hx6Eh2bkN_GrtTYvEoearZXsDj3G2B4Ul-U9XrxZlY9mVC9XEZ7NVOQVvitHBwZPtwb1gcoJwnMCWgY2ZAVFK8-tTTZMemsZx5wzdRWSnFyfDoNEHSaBIB_VDqlembZMgSO_t7V0mPQp2EXibGzYTAhDSAjEQvCTqU3dvSvC0xdAwE4gI76Xhcnnb3OJuuUY6g_QAnrNx3u9PTbeflyg2tJHBDyfh0rzH9v0QeHBp")' }}
-          >
-            <div className="flex flex-col gap-2 text-center">
-              <h1
-                className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
-              >
-                Find Your Path to Inner Peace
-              </h1>
-              <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                Welcome to Mindful Path, where we offer compassionate support for your mental well-being. Our services include neuropsychology, psychological support, and caregiver support.
-              </h2>
-            </div>
-            <Link to="/contact"> {/* Or to a more specific "Learn More" page if it exists */}
-              <button
-                className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#607afb] text-[#f8f9fc] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]"
-              >
-                <span className="truncate">Learn More</span>
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
-      <h2 className="text-[#0d0f1c] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Our Services</h2>
-      <div className="flex flex-col gap-10 px-4 py-10 @container">
-        <div className="flex flex-col gap-4">
-          <h1
-            className="text-[#0d0f1c] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
-          >
-            Comprehensive Support for Your Mental Well-being
-          </h1>
-          <p className="text-[#0d0f1c] text-base font-normal leading-normal max-w-[720px]">
-            We offer a range of services tailored to your unique needs, including neuropsychological assessments, individual therapy, and support for caregivers.
-          </p>
-        </div>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-0">
-          {/* Service Item 1 */}
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#ced2e9] bg-[#f8f9fc] p-4 flex-col">
-            <div className="text-[#0d0f1c]" data-icon="Brain" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M248,124a56.11,56.11,0,0,0-32-50.61V72a48,48,0,0,0-88-26.49A48,48,0,0,0,40,72v1.39a56,56,0,0,0,0,101.2V176a48,48,0,0,0,88,26.49A48,48,0,0,0,216,176v-1.41A56.09,56.09,0,0,0,248,124ZM88,208a32,32,0,0,1-31.81-28.56A55.87,55.87,0,0,0,64,180h8a8,8,0,0,0,0-16H64A40,40,0,0,1,50.67,86.27,8,8,0,0,0,56,78.73V72a32,32,0,0,1,64,0v68.26A47.8,47.8,0,0,0,88,128a8,8,0,0,0,0,16,32,32,0,0,1,0,64Zm104-44h-8a8,8,0,0,0,0,16h8a55.87,55.87,0,0,0,7.81-.56A32,32,0,1,1,168,144a8,8,0,0,0,0-16,47.8,47.8,0,0,0-32,12.26V72a32,32,0,0,1,64,0v6.73a8,8,0,0,0,5.33,7.54A40,40,0,0,1,192,164Zm16-52a8,8,0,0,1-8,8h-4a36,36,0,0,1-36-36V80a8,8,0,0,1,16,0v4a20,20,0,0,0,20,20h4A8,8,0,0,1,208,112ZM60,120H56a8,8,0,0,1,0-16h4A20,20,0,0,0,80,84V80a8,8,0,0,1,16,0v4A36,36,0,0,1,60,120Z"
-                ></path>
-              </svg>
-            </div>
-            <div className="flex flex-col gap-1">
-              <h2 className="text-[#0d0f1c] text-base font-bold leading-tight">Neuropsychology</h2>
-              <p className="text-[#47569e] text-sm font-normal leading-normal">Assessments and rehabilitation for cognitive functions.</p>
-            </div>
-          </div>
-          {/* Service Item 2 */}
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#ced2e9] bg-[#f8f9fc] p-4 flex-col">
-            <div className="text-[#0d0f1c]" data-icon="Heart" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.61,146.24,196.15,128,206.8Z"
-                ></path>
-              </svg>
-            </div>
-            <div className="flex flex-col gap-1">
-              <h2 className="text-[#0d0f1c] text-base font-bold leading-tight">Psychological Support</h2>
-              <p className="text-[#47569e] text-sm font-normal leading-normal">Therapy for emotional and mental health challenges.</p>
-            </div>
-          </div>
-          {/* Service Item 3 */}
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#ced2e9] bg-[#f8f9fc] p-4 flex-col">
-            <div className="text-[#0d0f1c]" data-icon="HandsClapping" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                  d="M168,24V8a8,8,0,0,1,16,0V24a8,8,0,0,1-16,0Zm35.83,17A7.9,7.9,0,0,0,208,42.13a8,8,0,0,0,6.84-3.83l8-13.11a8,8,0,1,0-13.66-8.33l-8,13.1A8,8,0,0,0,203.83,41Zm47.44,12.59a8,8,0,0,0-10.07-5.16l-15,4.85a8,8,0,0,0,2.45,15.62,8.15,8.15,0,0,0,2.46-.39l15-4.85A8,8,0,0,0,251.27,53.55Zm-30,39.94A79.71,79.71,0,0,1,208.68,190,80,80,0,0,1,62.49,208l-35-60.63A26,26,0,0,1,46.67,108.6l-4-6.94A26,26,0,0,1,61,63,26,26,0,0,1,72.4,31.63a26.05,26.05,0,0,1,30.81,3.58A26,26,0,0,1,147.09,37l12,20.79a26,26,0,0,1,43.18,2.78ZM115.92,55h0l5.93,10.27a25.87,25.87,0,0,1,5,6.24l12,20.75a26.2,26.2,0,0,1,16-9.78L133.24,45a10,10,0,0,0-13.66-3.66A10,10,0,0,0,115.92,55ZM76.74,59.15l5.93,10.28.32.29A25.93,25.93,0,0,1,99.71,58.94l-5.65-9.79a10,10,0,0,0-18.32,2.41A9.92,9.92,0,0,0,76.74,59.15ZM193.59,184.57a63.61,63.61,0,0,0-6.4-48.57l-19-32.91a10,10,0,0,0-17.74,9.18L161.87,132A8,8,0,1,1,148,140L113,79.53A10,10,0,0,0,95.63,89.4L120.26,132a8,8,0,1,1-13.85,8L73.84,83.66a10,10,0,1,0-17.32,10l36,62.36a8,8,0,1,1-13.86,8l-20-34.64a10,10,0,0,0-17.32,10l35,60.63a64,64,0,0,0,117.25-15.44Zm13.82-83.08-19-32.91a10,10,0,0,0-17.32,10h0L177,88.83a26.06,26.06,0,0,1,5,6.26l19,32.91a80.13,80.13,0,0,1,10.13,30A63.82,63.82,0,0,0,207.41,101.49Z"
-                ></path>
-              </svg>
-            </div>
-            <div className="flex flex-col gap-1">
-              <h2 className="text-[#0d0f1c] text-base font-bold leading-tight">Caregiver Support</h2>
-              <p className="text-[#47569e] text-sm font-normal leading-normal">Guidance and resources for those caring for loved ones.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Box>
+      {/* Hero Section */}
+      <Box
+        sx={{
+          minHeight: { xs: 300, sm: 400, md: 480 },
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          gap: 3,
+          p: { xs: 2, sm: 3, md: 4 },
+          color: 'common.white',
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%), url("${heroImageUrl}")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          borderRadius: 1, // Consistent border radius
+          mb: 4, // Margin bottom for spacing
+        }}
+      >
+        <Typography
+          variant="h2"
+          component="h1"
+          fontWeight="bold"
+          sx={{ fontSize: { xs: '2.5rem', sm: '3rem', md: '3.75rem' } }}
+        >
+          Find Your Path to Inner Peace
+        </Typography>
+        <Typography
+          variant="h6"
+          component="h2"
+          sx={{ maxWidth: 'md', fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+        >
+          Welcome to Mindful Path, where we offer compassionate support for your mental well-being. Our services include neuropsychology, psychological support, and caregiver support.
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary" // Or a custom color from theme
+          size="large"
+          component={RouterLink}
+          to="/contact" // Or a dedicated "learn more" page
+          sx={{ mt: 2, py: 1.5, px: 4, fontSize: {xs: '0.875rem', sm: '1rem'} }}
+        >
+          Learn More
+        </Button>
+      </Box>
+
+      {/* Introductory Text Section (Optional, can be merged or kept separate) */}
+      <Box sx={{ textAlign: 'center', my: 4, px: 2 }}>
+        <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
+          Comprehensive Support for Your Mental Well-being
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 'lg', margin: '0 auto' }}>
+          We offer a range of services tailored to your unique needs, including neuropsychological assessments, individual therapy, and support for caregivers.
+        </Typography>
+      </Box>
+
+      {/* Services Section */}
+      <Box sx={{ my: 5, px: 2 }}>
+        <Typography variant="h4" component="h2" gutterBottom sx={{ textAlign: 'center', fontWeight: 'bold', mb: 4 }}>
+          Our Services
+        </Typography>
+        <Grid container spacing={4} justifyContent="center">
+          {services.map((service) => (
+            <Grid item xs={12} sm={6} md={4} key={service.title}>
+              <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 2, height: '100%', textAlign: 'center' }}>
+                <Box sx={{ mb: 2 }}>
+                  {service.icon}
+                </Box>
+                <CardContent>
+                  <Typography variant="h5" component="div" gutterBottom sx={{ fontWeight: 'medium' }}>
+                    {service.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {service.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+    </Box>
   );
 };
 

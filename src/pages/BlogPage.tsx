@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { getAllBlogPosts, type BlogPost } from '../services/blogService'; // Adjusted path
+import { Link as RouterLink } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress'; // For loading state
+import { getAllBlogPosts, BlogPost } from '../services/blogService';
 
 const BlogPage: React.FC = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -21,59 +30,76 @@ const BlogPage: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchPosts();
   }, []);
 
   if (loading) {
-    return <div className="layout-content-container flex flex-col max-w-[960px] flex-1 p-4">Loading posts...</div>;
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 200px)' }}> {/* Adjust minHeight as needed */}
+        <CircularProgress />
+      </Box>
+    );
   }
 
   if (error) {
-    return <div className="layout-content-container flex flex-col max-w-[960px] flex-1 p-4">Error: {error}</div>;
-  }
-
-  if (posts.length === 0) {
-    return <div className="layout-content-container flex flex-col max-w-[960px] flex-1 p-4">No blog posts found.</div>;
+    return (
+      <Box sx={{ textAlign: 'center', py: 5 }}>
+        <Typography variant="h6" color="error">{error}</Typography>
+      </Box>
+    );
   }
 
   return (
-    <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-      <div className="flex flex-wrap justify-between gap-3 p-4">
-        <div className="flex min-w-72 flex-col gap-3">
-          <p className="text-[#121217] tracking-light text-[32px] font-bold leading-tight">Blog</p>
-          <p className="text-[#656a86] text-sm font-normal leading-normal">Insights and articles on neuropsychology, psychological support, and caregiver well-being.</p>
-        </div>
-      </div>
+    <Box sx={{ py: 2 }}>
+      <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 'bold', textAlign: 'center', mb: 1 }}>
+        Blog
+      </Typography>
+      <Typography variant="subtitle1" color="text.secondary" sx={{ textAlign: 'center', mb: 4, maxWidth: 'md', mx: 'auto' }}>
+        Insights and articles on neuropsychology, psychological support, and caregiver well-being.
+      </Typography>
 
-      {posts.map((post) => (
-        <div className="p-4 @container" key={post.id}>
-          <div className="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start">
-            {post.imageUrl && (
-              <div
-                className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl @xl:w-1/3 @xl:aspect-square" // Adjusted for better layout
-                style={{ backgroundImage: `url("${post.imageUrl}")` }}
-              ></div>
-            )}
-            <div className={`flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 ${post.imageUrl ? '@xl:px-4' : ''}`}>
-              <p className="text-[#121217] text-lg font-bold leading-tight tracking-[-0.015em]">{post.title}</p>
-              <div className="flex items-end gap-3 justify-between">
-                <p className="text-[#656a86] text-base font-normal leading-normal">
-                  {post.excerpt || (post.content ? post.content.substring(0, 150) + '...' : '')} {/* Show excerpt or truncated content */}
-                </p>
-                <Link to={`/blog/${post.id}`}>
-                  <button
-                    className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#3e58da] text-white text-sm font-medium leading-normal whitespace-nowrap" // Added whitespace-nowrap
+      {posts.length === 0 ? (
+        <Typography variant="h6" sx={{ textAlign: 'center', py: 5 }}>
+          No blog posts found.
+        </Typography>
+      ) : (
+        <Grid container spacing={4}>
+          {posts.map((post) => (
+            <Grid item xs={12} sm={6} md={4} key={post.id}>
+              <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                {post.imageUrl && (
+                  <CardMedia
+                    component="img"
+                    height="200" // Adjust height as needed
+                    image={post.imageUrl}
+                    alt={post.title}
+                  />
+                )}
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography gutterBottom variant="h5" component="h2" sx={{fontWeight: 'medium'}}>
+                    {post.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {post.excerpt || (post.content ? post.content.substring(0, 120) + '...' : '')}
+                  </Typography>
+                </CardContent>
+                <CardActions sx={{ justifyContent: 'flex-start', pt: 0, pb:1, px:1.5}}>
+                  <Button
+                    size="small"
+                    component={RouterLink}
+                    to={`/blog/${post.id}`}
+                    variant="contained" // Make it more prominent
+                    color="primary"
                   >
-                    <span className="truncate">Read More</span>
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+                    Read More
+                  </Button>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
+    </Box>
   );
 };
 

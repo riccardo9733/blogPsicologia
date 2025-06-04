@@ -1,69 +1,94 @@
 import React from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper'; // Optional for sectioning
+
+const openingHoursData = [
+  { day: 'Monday', hours: '9:00 AM - 5:00 PM' },
+  { day: 'Tuesday', hours: '9:00 AM - 5:00 PM' },
+  { day: 'Wednesday', hours: '9:00 AM - 5:00 PM' },
+  { day: 'Thursday', hours: '9:00 AM - 5:00 PM' },
+  { day: 'Friday', hours: '9:00 AM - 5:00 PM' },
+  { day: 'Saturday', hours: 'Closed' },
+  { day: 'Sunday', hours: 'Closed' },
+];
 
 const ContactPage: React.FC = () => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Form submission logic will go here later
+    console.log('Form submitted');
+    // Potentially clear form or show a success message
+  };
+
   return (
-    <div className="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1"> {/* Adjusted classes to match provided HTML structure */}
-      <div className="flex flex-wrap justify-between gap-3 p-4">
-        <p className="text-[#0d0f1c] tracking-light text-[32px] font-bold leading-tight min-w-72">Contact Us</p>
-      </div>
-      <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-        <label className="flex flex-col min-w-40 flex-1">
-          <input
-            placeholder="Your Name"
-            className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d0f1c] focus:outline-0 focus:ring-0 border border-[#ced2e9] bg-[#f8f9fc] focus:border-[#ced2e9] h-14 placeholder:text-[#47569e] p-[15px] text-base font-normal leading-normal"
-          />
-        </label>
-      </div>
-      <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-        <label className="flex flex-col min-w-40 flex-1">
-          <input
-            placeholder="Your Email"
-            className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d0f1c] focus:outline-0 focus:ring-0 border border-[#ced2e9] bg-[#f8f9fc] focus:border-[#ced2e9] h-14 placeholder:text-[#47569e] p-[15px] text-base font-normal leading-normal"
-          />
-        </label>
-      </div>
-      <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-        <label className="flex flex-col min-w-40 flex-1">
-          <input
-            placeholder="Subject"
-            className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d0f1c] focus:outline-0 focus:ring-0 border border-[#ced2e9] bg-[#f8f9fc] focus:border-[#ced2e9] h-14 placeholder:text-[#47569e] p-[15px] text-base font-normal leading-normal"
-          />
-        </label>
-      </div>
-      <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-        <label className="flex flex-col min-w-40 flex-1">
-          <textarea
-            placeholder="Your Message"
-            className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d0f1c] focus:outline-0 focus:ring-0 border border-[#ced2e9] bg-[#f8f9fc] focus:border-[#ced2e9] min-h-36 placeholder:text-[#47569e] p-[15px] text-base font-normal leading-normal"
-          ></textarea>
-        </label>
-      </div>
-      <div className="flex px-4 py-3 justify-end">
-        <button
-          className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#607afb] text-[#f8f9fc] text-sm font-bold leading-normal tracking-[0.015em]"
+    <Box sx={{ py: { xs: 2, sm: 3 } }}>
+      <Typography variant="h3" component="h1" gutterBottom sx={{ textAlign: 'center', fontWeight: 'bold', mb: 4 }}>
+        Contact Us
+      </Typography>
+
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          maxWidth: 'sm', // Max width for the form
+          mx: 'auto',    // Center the form
+          '& .MuiTextField-root': { mb: 2 }, // Margin bottom for text fields
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField label="Your Name" variant="outlined" fullWidth required />
+        <TextField label="Your Email" type="email" variant="outlined" fullWidth required />
+        <TextField label="Subject" variant="outlined" fullWidth required />
+        <TextField
+          label="Your Message"
+          variant="outlined"
+          fullWidth
+          required
+          multiline
+          rows={5}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          fullWidth // Make button full width of its container
+          sx={{ py: 1.5, fontSize: '1rem' }}
         >
-          <span className="truncate">Send Message</span>
-        </button>
-      </div>
-      <h3 className="text-[#0d0f1c] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Opening Hours</h3>
-      <div className="p-4 grid grid-cols-[20%_1fr] gap-x-6">
-        {/* Opening Hours Data */}
-        {[
-          { day: 'Monday', hours: '9:00 AM - 5:00 PM' },
-          { day: 'Tuesday', hours: '9:00 AM - 5:00 PM' },
-          { day: 'Wednesday', hours: '9:00 AM - 5:00 PM' },
-          { day: 'Thursday', hours: '9:00 AM - 5:00 PM' },
-          { day: 'Friday', hours: '9:00 AM - 5:00 PM' },
-          { day: 'Saturday', hours: 'Closed' },
-          { day: 'Sunday', hours: 'Closed' },
-        ].map(item => (
-          <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#ced2e9] py-5" key={item.day}>
-            <p className="text-[#47569e] text-sm font-normal leading-normal">{item.day}</p>
-            <p className="text-[#0d0f1c] text-sm font-normal leading-normal">{item.hours}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+          Send Message
+        </Button>
+      </Box>
+
+      <Box sx={{ maxWidth: 'sm', mx: 'auto', mt: 6, textAlign: 'center' }}>
+        <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'medium', mb: 3 }}>
+          Opening Hours
+        </Typography>
+        <Paper elevation={1} sx={{ borderRadius: 2}}> {/* Optional: wrap List in Paper */}
+          <List disablePadding>
+            {openingHoursData.map((item, index) => (
+              <React.Fragment key={item.day}>
+                <ListItem sx={{ py: 1.5 }}>
+                  <ListItemText
+                    primary={item.day}
+                    secondary={item.hours}
+                    primaryTypographyProps={{ fontWeight: 'medium' }}
+                  />
+                </ListItem>
+                {index < openingHoursData.length - 1 && <Divider component="li" />}
+              </React.Fragment>
+            ))}
+          </List>
+        </Paper>
+      </Box>
+    </Box>
   );
 };
 
