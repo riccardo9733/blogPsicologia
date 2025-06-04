@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllBlogPosts, BlogPost } from '../services/blogService'; // Adjusted path
+import { getAllBlogPosts, type BlogPost } from '../services/blogService'; // Adjusted path
 
 const BlogPage: React.FC = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);

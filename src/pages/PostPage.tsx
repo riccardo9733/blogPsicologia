@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getBlogPostById, BlogPost } from '../services/blogService'; // Adjusted path
+import { getBlogPostById, type BlogPost } from '../services/blogService'; // Adjusted path
 
 const PostPage: React.FC = () => {
   const { postId } = useParams<{ postId: string }>();
